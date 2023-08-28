@@ -35,19 +35,43 @@ function createUser(user) {
     if(validateUser) {
         return validateUser
     }
-    
+    // const { name, email, password } = user;
     const new_user = {
         id: nextId,
-        name: user.name,
-        email: user.email,
-        passsword: user.password
+        ...user,
     }
     users.push(new_user)
     return new_user
+}
+
+function updateUserById(id, userUpdate) {
+    const users = getAllUsers()
+    const validateIds = validateId(id)
+    const validateUser = validateNewUser(userUpdate)
+
+    if(validateIds) {
+        return validateIds
+    }
+
+    if(validateUser) {
+        return validateUser
+    }
+
+    for (let index = 0; index < users.length; index++) {
+        const user = users[index];
+        if (id === user.id) {
+             user.name = userUpdate.name
+             user.email = userUpdate.email
+             user.password = userUpdate.password
+             return user
+        }
+    }
+    return 'not found'
 }
 
 module.exports = {
     getAllUsers,
     getById,
     createUser,
+    updateUserById,
 }
