@@ -1,7 +1,6 @@
-const data = require('./data/data')
 const { validateData, validateId, validateNewUser } = require('./middlewares/validations');
 
-function getAllUsers() {
+function getAll(data) {
     const validateUsers = validateData(data)
 
     if (validateUsers) {
@@ -10,18 +9,17 @@ function getAllUsers() {
     return data;
 }
 
-function getById(id) {
-    const users = getAllUsers()
+function getById(data, id) {
     const validateIds = validateId(id)
 
     if(validateIds) {
         return validateIds
     }
 
-    for (let index = 0; index < users.length; index++) {
-        const user = users[index];
-        if (user.id === id) {
-            return user
+    for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        if (element.id === id) {
+            return element
         }
     }
     return 'not found user'
@@ -70,7 +68,7 @@ function updateUserById(id, userUpdate) {
 }
 
 module.exports = {
-    getAllUsers,
+    getAll,
     getById,
     createUser,
     updateUserById,

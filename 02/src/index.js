@@ -1,27 +1,26 @@
-const { createUser, getAllUsers, getById, updateUserById } = require('./scripts');
+const users = require('./data/users');
+const products = require('./data/products');
+const {  getAll, getById } = require('./functions/scripts');
+const { createUser, updateUserById } = require('./functions/user');
 
-const all_users = getAllUsers();
-const findById = getById(5)
-const updateUserById_1 = updateUserById(5, {
-    
-});
-// const new_user = createUser({
-//     name: 'mario brito',
-//     email: 'mariobrito@gmail.com',
-//     password: 'djdk24945kd'
-// })
+const allUsers = getAll(users);
+const allProducts = getAll()
+const findUser = getById(users, 5)
+const findProduct = getById(products, 3)
+const newUser = createUser(users, {
+    name: 'Mario',
+    email: 'mario@email.com',
+    password: '1234'
+})
 
-// const new_user2 = createUser({
-//     name: 'Lucas',
-//     email: 'lucas@email.com',
-//     password: '12344566'
-// })
+const updateUser = updateUserById(users, 5, {
+    name: 'Mario',
+    email: 'mario@email.com',
+    password: '1234',
+    cargo: 'Gerente'
+})
 
-//console.log(all_users)
-console.log(updateUserById_1)
-const exemplo = {
-    name: 'arqueiro verde'
-}
-exemplo.name = 'thor'
-console.log(exemplo.name)
-//console.log(findById)
+console.log(allUsers)
+
+
+
